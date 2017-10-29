@@ -1,12 +1,11 @@
 language: go
 go:
-  - 1.7
-  - 1.8
-  - 1.9
+  - 1.5
+  - release
   - tip
 
-before_script:
-  - go get ./...
+install:
+  - go get -t -v ./...
 
 script:
   - go test -v ./...
