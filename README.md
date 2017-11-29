@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/ukautz/cast.svg?branch=master)](https://travis-ci.org/ukautz/cast)
-[![Coverage](https://gocover.io/_badge/github.com/ukautz/cast?v=0.1.3)](http://gocover.io/github.com/ukautz/cast)
+[![Coverage](https://gocover.io/_badge/github.com/ukautz/cast?v=0.1.6)](http://gocover.io/github.com/ukautz/cast)
 [![GoDoc](https://godoc.org/github.com/ukautz/gpath?status.svg)](https://godoc.org/github.com/ukautz/gpath)
 
 cast
