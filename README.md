@@ -12,7 +12,8 @@ My primary use case: dealing with deep & complex YAML/JSON configuration files, 
 contain string("123") numbers or annoying float64(0.0) numbers where int is expected and so on.
 See also github.com/ukautz/gpath to that end.
 
-This library is not optimized for performance but for simplifying interaction with user input - and keeping
-too often written, ugly, repetitive conditional type conversion code from my other projects.
+This library is not optimized for performance but for safely work with work with "user input"
+and keeping too often written, ugly, repetitive conditional type conversion code
+from in other projects like flexible configuration files, 
 
 See [godoc.org/github.com/ukautz/cast](https://godoc.org/github.com/ukautz/cast) 

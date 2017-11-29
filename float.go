@@ -10,6 +10,11 @@ import (
 // are accepted as well. If casting is not possible, second return parameter is false
 func CastFloat(val interface{}) (float64, bool) {
 	switch val.(type) {
+	case bool:
+		if val.(bool) {
+			return 1, true
+		}
+		return 0, true
 	case int:
 		return float64(val.(int)), true
 	case int8:
@@ -47,6 +52,11 @@ func CastFloat(val interface{}) (float64, bool) {
 func strToFloat(str string) (float64, bool) {
 	if fval, err := strconv.ParseFloat(str, 64); err == nil {
 		return fval, true
+	} else if bval, err := strconv.ParseBool(str); err == nil {
+		if bval {
+			return 1, true
+		}
+		return 0, true
 	}
 	return 0, false
 }

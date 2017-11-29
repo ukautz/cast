@@ -11,6 +11,11 @@ func CastString(val interface{}) (string, bool) {
 	switch val.(type) {
 	case string:
 		return val.(string), true
+	case bool:
+		if val.(bool) {
+			return "true", true
+		}
+		return "false", true
 	case int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64:
 		return fmt.Sprintf("%d", val), true
 	case float32, float64:

@@ -35,11 +35,21 @@ func TestCastFloat(t *testing.T) {
 		{"aa", 0, false},
 		{[]string{"aa"}, 0, false},
 		{[]int{123}, 0, false},
+		{true, 1, true},
+		{false, 0, true},
+		{"true", 1, true},
+		{"false", 0, true},
+		{"T", 1, true},
+		{"F", 0, true},
+		{"True", 1, true},
+		{"False", 0, true},
+		{"TRUE", 1, true},
+		{"FALSE", 0, true},
 	}
 	for _, e := range expects {
 		val, ok := CastFloat(e.from)
-		assert.Equal(t, e.to_ok, ok, fmt.Sprintf("Expect %###v -> %v", e.from, e.to_ok))
-		assert.True(t, e.to_val > val-0.0001 && e.to_val < val+0.0001, fmt.Sprintf("Expect %###v -> %.5f", e.from, e.to_val))
+		assert.Equal(t, e.to_ok, ok, fmt.Sprintf("Expect ok %###v -> %v", e.from, e.to_ok))
+		assert.True(t, e.to_val > val-0.0001 && e.to_val < val+0.0001, fmt.Sprintf("Expect val %###v -> %.5f", e.from, e.to_val))
 	}
 }
 
@@ -71,9 +81,14 @@ func TestCastFloats(t *testing.T) {
 		{[]*testString{testStringer1}, []float64{123}},
 		{[]interface{}{12.5, "12.5"}, []float64{12.5, 12.5}},
 		{[]interface{}{12.5, "12.5", "a"}, nil},
+		{[]bool{true, false, true}, []float64{1, 0, 1}},
+		{[]interface{}{true, "F", "TRUE"}, []float64{1, 0, 1}},
 	}
 	for _, e := range expects {
 		val := CastFloats(e.from)
 		assert.Equal(t, e.to_val, val, fmt.Sprintf("Expect %###v -> %###v", e.from, e.to_val))
 	}
 }
+
+
+

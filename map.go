@@ -58,6 +58,17 @@ func CastMapStringFloat(from interface{}) (map[string]float64, bool) {
 	return nil, false
 }
 
+// CastMapStringBool accepts any map and casts its into map[string]bool - second return parameter
+// is false, if any key cannot be casted to string or any value cannot be casted into bool
+func CastMapStringBool(from interface{}) (map[string]bool, bool) {
+	kt := createStringType()
+	vt := createBoolType()
+	if val, err := CastMapValue(vof(from), kt, vt); err == nil {
+		return val.Interface().(map[string]bool), true
+	}
+	return nil, false
+}
+
 // CastMapValue accepts any map and casts its into map of provided key and value types - second
 // return parameter contains error, if casting to given types is not possible
 func CastMapValue(src reflect.Value, keyType, valType reflect.Type) (*reflect.Value, error) {
@@ -117,6 +128,9 @@ func createIntType() reflect.Type {
 }
 func createFloatType() reflect.Type {
 	return reflect.TypeOf((*float64)(nil)).Elem()
+}
+func createBoolType() reflect.Type {
+	return reflect.TypeOf((*bool)(nil)).Elem()
 }
 func createInterfaceType() reflect.Type {
 	return reflect.TypeOf((*interface{})(nil)).Elem()

@@ -35,6 +35,10 @@ func TestCastString(t *testing.T) {
 		{testStringer3, "", false},
 		{[]string{"aa"}, "", false},
 		{[]int{123}, "", false},
+		{true, "true", true},
+		{false, "false", true},
+		{"T", "T", true},
+		{"F", "F", true},
 	}
 	for _, e := range expects {
 		val, ok := CastString(e.from)
@@ -73,6 +77,8 @@ func TestCastStrings(t *testing.T) {
 		{[]interface{}{testStringer2}, nil},
 		{[]interface{}{12.5, "12.5"}, []string{"12.5", "12.5"}},
 		{[]interface{}{12.5, "12.5", "a"}, []string{"12.5", "12.5", "a"}},
+		{[]bool{true, false, true}, []string{"true", "false", "true"}},
+		{[]interface{}{true, "F", "TRUE"}, []string{"true", "F", "TRUE"}},
 	}
 	for _, e := range expects {
 		val := CastStrings(e.from)

@@ -34,6 +34,16 @@ func TestCastInt(t *testing.T) {
 		{"aa", 0, false},
 		{[]string{"aa"}, 0, false},
 		{[]int{123}, 0, false},
+		{true, 1, true},
+		{false, 0, true},
+		{"true", 1, true},
+		{"false", 0, true},
+		{"T", 1, true},
+		{"F", 0, true},
+		{"True", 1, true},
+		{"False", 0, true},
+		{"TRUE", 1, true},
+		{"FALSE", 0, true},
 	}
 	for _, e := range expects {
 		val, ok := CastInt(e.from)
@@ -70,6 +80,8 @@ func TestCastInts(t *testing.T) {
 		{[]*testString{testStringer1}, []int64{123}},
 		{[]interface{}{12.5, "12.5"}, []int64{12, 12}},
 		{[]interface{}{12.5, "12.5", "a"}, nil},
+		{[]bool{true, false, true}, []int64{1, 0, 1}},
+		{[]interface{}{true, "F", "TRUE"}, []int64{1, 0, 1}},
 	}
 	for _, e := range expects {
 		val := CastInts(e.from)

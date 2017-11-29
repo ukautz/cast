@@ -77,6 +77,10 @@ func CastToValue(value reflect.Value, kind reflect.Kind) *reflect.Value {
 		if sval, ok := CastString(value.Interface()); ok {
 			return vofp(sval)
 		}
+	case reflect.Bool:
+		if bval, ok := CastBool(value.Interface()); ok {
+			return vofp(bval)
+		}
 	}
 	return nil
 }

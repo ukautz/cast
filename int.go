@@ -10,6 +10,11 @@ import (
 // are accepted as well. If casting is not possible, second return parameter is false
 func CastInt(val interface{}) (int64, bool) {
 	switch val.(type) {
+	case bool:
+		if val.(bool) {
+			return 1, true
+		}
+		return 0, true
 	case int:
 		return int64(val.(int)), true
 	case int8:
@@ -49,6 +54,11 @@ func strToInt(str string) (int64, bool) {
 		return int64(ival), true
 	} else if fval, err := strconv.ParseFloat(str, 64); err == nil {
 		return int64(fval), true
+	} else if bval, err := strconv.ParseBool(str); err == nil {
+		if bval {
+			return 1, true
+		}
+		return 0, true
 	}
 	return 0, false
 }

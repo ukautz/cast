@@ -122,3 +122,14 @@ func TestCastMapStringFloat(t *testing.T) {
 	resm, ok = CastMapStringFloat(_testCastMap())
 	assert.False(t, ok, "Not entirely valid map could not be casted")
 }
+
+func TestCastMapStringBool(t *testing.T) {
+	res, err := CastPartialMapValue(vof(_testCastMap()), createStringType(), createBoolType())
+	assert.Nil(t, err, "No casting error")
+	assert.Equal(t, map[string]bool{"4": true, "6.5": true, "c": true, "2": true}, res.Interface(), "Casted matches assumption")
+	resm, ok := CastMapStringBool(res.Interface())
+	assert.True(t, ok, "Valid map could be casted")
+	assert.Equal(t, map[string]bool{"4": true, "6.5": true, "c": true, "2": true}, resm, "Result matches input")
+	resm, ok = CastMapStringBool(_testCastMap())
+	assert.False(t, ok, "Not entirely valid map could not be casted")
+}
